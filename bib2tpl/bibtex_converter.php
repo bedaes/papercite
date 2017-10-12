@@ -286,6 +286,14 @@ class BibtexConverter
 	default: 
 	  $entry["key"] = "?";
 	}
+
+      //blacklist bibtex fields
+      //match fields and delete lines
+      //will not be shown in [BibTeX]
+      $entry["bibtex"]=preg_replace("/^\s*(cdsbibtype|affiliation|pdfurl|timestamp|project)\s*=\s*\{.*\}\s*,?\s*\r?\n\s*/ismU", "", $entry["bibtex"]);
+      // remove trailing commas and whitespaces
+      $entry["bibtex"]=preg_replace("/(?:\s*,\s*)+(\r?\n})\s*$/", "$1", $entry["bibtex"]);
+      //http://www.phpliveregex.com/
       }
     }
   }
